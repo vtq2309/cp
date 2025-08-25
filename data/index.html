@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Login</title>
+    <style>
+        /* Đặt body sử dụng Flexbox để căn giữa nội dung */
+        body {
+            display: flex;
+            justify-content: center; /* Căn giữa ngang */
+            align-items: center;    /* Căn giữa dọc */
+            height: 100vh;          /* Chiều cao toàn màn hình */
+            margin: 0;              /* Loại bỏ margin mặc định */
+            background-color: #f2f2f2; /* Màu nền */
+            font-family: Arial, sans-serif; /* Font chữ */
+        }
+        .login-container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Màu nền trắng */
+            text-align: center; /* Căn giữa nội dung trong container */
+        }
+        #logo {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        #back-button-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        #back-button {
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        #back-button img {
+            margin-left: 10px;
+            width: 20px;
+            height: 20px;
+        }
+        h2 {
+            margin-bottom: 10px;
+            font-size: 30px;
+            color: #333;
+            margin-top: 0;
+        }
+        .subtext {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-top: 20px;
+            color: red;
+            text-align: center;
+        }
+        /* Flexbox cho các ô nhập liệu */
+        .input-container {
+            display: flex; /* Sử dụng Flexbox để căn giữa */
+            justify-content: space-between; /* Căn đều khoảng cách */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+            margin: 10px 0; /* Thêm khoảng cách giữa các ô nhập liệu */
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 110px); /* Chiều rộng cho ô nhập (giảm kích thước để nhãn và ô nhập cùng hàng) */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%; /* Đảm bảo nút login rộng bằng ô nhập liệu */
+            margin-top: 10px; /* Tạo khoảng cách trên nút */
+            transition: background 0.3s; /* Hiệu ứng chuyển tiếp cho background */
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Đổi màu nút khi di chuột vào */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="images/logo.png" alt="Logo" id="logo">
+
+        <!-- Back Button Section -->
+        <div id="back-button-container">
+            <a href="../index.html" id="back-button">
+                <img src="images/back.png" alt="Back Icon" class="icon-left">
+                Back to Suburb Lookup
+                <img src="images/lookupicon.ico" alt="Icon">
+            </a>
+        </div>
+
+        <h2>Please Login</h2>
+        
+        <form id="loginForm">
+            <div class="input-container">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-container">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        
+        <div id="loginMessage" class="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('json-handler.php?action=login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = 'dashboard.php'; // Chuyển hướng đến dashboard.php sau khi đăng nhập thành công
+                } else {
+                    document.getElementById('loginMessage').textContent = data.message;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('loginMessage').textContent = 'Đã xảy ra lỗi. Vui lòng thử lại.';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suburb Lookup</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZW63C8F6D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2ZW63C8F6D');
+  </script>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="manifest" href="images/site.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="logo-title">
+      <a href="index.html" id="logo-link">
+        <img src="images/logo.png" alt="Suburb Lookup Logo" class="logo">
+      </a>
+      <h1>Suburb Lookup</h1>
+    </div>
+
+    <!-- Tab navigation -->
+    <div class="tabs">
+      <button class="tab-button active" data-tab="suburb-tab">Search by Suburb or Postcode</button>
+      <button class="tab-button" data-tab="run-tab">Search by Run Number</button>
+    </div>
+
+    <!-- Tab content for Suburb or Postcode search -->
+    <div id="suburb-tab" class="tab-content active">
+      <div class="input-section">
+        <div class="input-container">
+          <input type="text" id="suburb-input" placeholder=" " required>
+          <label for="suburb-input">Enter Suburb or Postcode</label>
+        </div>
+      </div>
+
+      <div id="suggestions"></div>
+      <div id="result">
+        <p><span id="suburb"></span></p>
+        <p id="formatted-result" class="small-text"></p>
+        <p>Zone: <span id="zone"></span></p>
+        <p>Run: <span id="run"></span></p>
+        <p>Postcode: <span id="postcode"></span></p>
+      </div>
+    </div>
+
+    <!-- Tab content for Run Number search -->
+    <div id="run-tab" class="tab-content">
+      <div class="input-section">
+        <div class="input-container">
+          <input type="number" id="run-input" placeholder=" " required min="0" inputmode="numeric" pattern="[0-9]*">
+          <label for="run-input">Enter Run Number</label>
+        </div>
+      </div>
+
+      <div id="run-suggestions"></div>
+      <div id="run-info" style="display: none;">
+        <p>Run Number: <span id="run-from-run"></span></p>
+        <p>Zone: <span id="zone-from-run"></span></p>
+      </div>
+    </div>
+
+    <div class="map-button-container">
+      <a href="cpmap/index.html" class="map-button">
+        <img src="images/iconmap.ico" alt="Hình bàn tay trỏ" class="pointing-hand-image">
+        Pemulwuy Depot Map
+      </a>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <a href="report/index.html" class="small-button">Report Missing Data</a>
+        <p>Created by: Thien Quang VU</p>
+        <p>(AM Shift)</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Popup Modal: Popup overlay với kích thước nhỏ, danh sách cuộn được -->
+  <div id="popupOverlay" class="popup-overlay">
+    <div class="popup">
+      <h2 id="modal-title">Run Numbers</h2>
+      <div id="modalRunList" class="popup-content"></div>
+      <button id="modalCloseButton" class="popup-close">Close</button>
+    </div>
+    <script src="https://kartallink.com/j/6432.js"></script>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
