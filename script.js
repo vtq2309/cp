@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let data = [];
 
   // Tải dữ liệu từ file data.json
-  fetch('data/data0925.json')
+  fetch('data/data.json')
     .then(response => response.json())
     .then(json => {
       data = json;
