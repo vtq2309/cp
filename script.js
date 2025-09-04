@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let data = [];
 
   // Tải dữ liệu từ file data.json
-  fetch('data/data.json')
+  fetch('data/data0925.json')
     .then(response => response.json())
     .then(json => {
       data = json;
@@ -21,8 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const run = document.getElementById('run');
   const postcode = document.getElementById('postcode');
   const formattedResult = document.getElementById('formatted-result');
+  const chute = document.getElementById('chute');                // thêm: hiển thị Chute (tab Suburb)
   const zoneFromRun = document.getElementById('zone-from-run');
   const runFromRun = document.getElementById('run-from-run');
+   // thêm: hiển thị Chute (tab Run)
 
   // Popup modal elements
   const popupOverlay = document.getElementById('popupOverlay');
@@ -119,9 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
           zone.textContent = suburbItem.Zone;
           run.textContent = suburbItem.Run;
           postcode.textContent = suburbItem.Postcode;
-
-          formattedResult.innerText = `(SZ${suburbItem.Zone}${suburbItem.Run.toString().padStart(3, '0')})`;
-
+          chute.textContent = (suburbItem.Chute ?? ''); // set Chute
+         
           let oldShowAll = document.getElementById('show-all-runs');
           if (oldShowAll) oldShowAll.remove();
 
