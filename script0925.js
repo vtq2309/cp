@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chute = document.getElementById('chute');                // thêm: hiển thị Chute (tab Suburb)
   const zoneFromRun = document.getElementById('zone-from-run');
   const runFromRun = document.getElementById('run-from-run');
-   // thêm: hiển thị Chute (tab Run)
+  const chuteFromRun = document.getElementById('chute-from-run'); // thêm: hiển thị Chute (tab Run)
 
   // Popup modal elements
   const popupOverlay = document.getElementById('popupOverlay');
@@ -173,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
           runInput.value = '';
           runFromRun.textContent = runItem.Run;
           zoneFromRun.textContent = runItem.Zone;
+          chuteFromRun.textContent = (runItem.Chute ?? ''); // set Chute cho tab Run
           runInfo.style.display = 'block';
 
           let oldShowAll = document.getElementById('show-all-runs-run');
