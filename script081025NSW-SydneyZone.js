@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     NSW: 'data/dataNSW.json',                        // Suburb, Postcode, SortCode
     NSW_SYDNEYZONE: 'data/dataNSW-SydneyZone.json',  // Suburb, Postcode, Zone, Run, Chute
     VIC: 'data/dataVIC.json',                        // Suburb, Postcode, SortCode
+	ALL: 'data/dataAll.json',
   };
 
   // DOM refs
